@@ -26,5 +26,5 @@ int[] array = new int[n];
 
 FillArray(array);
 
-Write($"[{String.Join(",", array)}]-> {FindEvenNumber(array)}");
+Write($"[{String.Join(", ", array)}]-> {FindEvenNumber(array)}");
 
