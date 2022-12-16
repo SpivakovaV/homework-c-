@@ -11,7 +11,6 @@ void FillArray(double[,]array)
         {
             Random x = new Random();
             array[i, j] = x.Next(10);
-
         }
     }
 }
