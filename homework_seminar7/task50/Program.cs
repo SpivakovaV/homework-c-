@@ -3,52 +3,61 @@
 using static System.Console;
 Clear();
 
-
-Write("Rows in an array:");
-int m=int.Parse(ReadLine());
-Write("Columns in an array:");
-int n = int.Parse(ReadLine());
-double[,]arr=new double[m,n];
-Write("What the number to find in the array:");
-int digit=int.Parse(ReadLine());
-fillArr(arr);
-printArr(arr);
-printArrDigit(arr,digit);
-
-void fillArr(double[,]arr)
+void FillArray(double[,]array)
 {
-    for (int i = 0; i < arr.GetLength(0); i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        for(int j = 0; j < arr.GetLength(1); j++)
+        for(int j = 0; j < array.GetLength(1); j++)
         {
             Random x = new Random();
-            arr[i, j] = x.Next(10);
+            array[i, j] = x.Next(10);
 
         }
     }
 }
-void printArr(double[,] arr)
+
+void PrintArray(double[,] array)
 {
-    for (int i = 0; i < arr.GetLength(0); i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            Write($"{arr[i, j]} ");
+            Write($"{array[i, j]} ");
         }
-        Write("\n");
+        WriteLine();
     }
 }
-void printArrDigit(double[,] arr,int digit)
+
+void FindElement(double[,] array,int digit)
 {
-    int checkCounter = 0;
-    for (int i = 0; i < arr.GetLength(0); i++)
+    int temp = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            if (arr[i, j] == digit) WriteLine($"The number {digit} found in the  {i + 1} row and in the {j + 1} collumn");
-            else checkCounter++;
+            if (array[i, j] == digit) WriteLine($"Число {digit} найдено в {i + 1} строке {j + 1} столбце.");
+            else temp++;
         }
     }
-    if (checkCounter == arr.Length) WriteLine("There is no such number");
+    if (temp == array.Length) WriteLine("Заданного элемента в массиве нет.");
 }
+
+Write("Сколько строк будет в массиве: ");
+int m=int.Parse(ReadLine());
+Write("Сколько столбцов будет в массиве: ");
+int n = int.Parse(ReadLine());
+
+double[,]array=new double[m,n];
+
+Write("Какой элемент массива мы ищем? ");
+int digit=int.Parse(ReadLine());
+
+FillArray(array);
+WriteLine();
+
+PrintArray(array);
+WriteLine();
+
+FindElement(array, digit);
+WriteLine();
         
