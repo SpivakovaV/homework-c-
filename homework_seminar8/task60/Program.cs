@@ -1,61 +1,66 @@
-﻿// Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента. Массив размером 2 x 2 x 2
+﻿// Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 
-using System;
+using static System.Console;
 Console.Clear();
 
-Console.WriteLine("Введите размеры массива через пробел: ");
-string[] nums = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-int[,,] array = GetArray(new int[] { int.Parse(nums[0]), int.Parse(nums[1]), int.Parse(nums[2]), }, 10, 99);
-PrintArray(array);
-
-int[,,] GetArray(int[] sizes, int min, int max)
+int[,,] GetArray(int length, int height, int width) // Метод заполнения трехмерного массива неповторяющимися цифрами
 {
-    int[,,] result = new int[sizes[0], sizes[1], sizes[2]];
-    for (int i = 0; i < result.GetLength(0); i++)
+    int[,,] A = new int[length, height, width]; 
+
+    for (int i = 0; i < A.GetLength(0); i++) 
     {
-        for (int j = 0; j < result.GetLength(1); j++)
+        for (int j = 0; j < A.GetLength(1); j++) 
         {
-            int k = 0;
-            while (k < result.GetLength(2))
+            for (int k = 0; k < A.GetLength(2);) 
             {
-                int element = new Random().Next(min, max + 1);
-                if (FindElement(result, element)) continue;
-                result[i, j, k] = element;
-                k++;
+                int element = new Random().Next(10, 99); 
+                if (Unique(A, element) is true) 
+                continue;
+                A[i,j,k] = element; 
+                k ++; 
             }
         }
     }
-    return result;
+    return A;
 }
 
-bool FindElement(int[,,] array, int el)
+void PrintArray(int[,,] inArray) //Метод вывода массива построчно с указанием индекса
 {
-    for (int i = 0; i < array.GetLength(0); i++)
+    for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
+        for (int j = 0; j < inArray.GetLength(1); j++)
         {
-            for (int k = 0; k < array.GetLength(2); k++)
+            for (int k = 0; k < inArray.GetLength(2) ; k++)
             {
-                if (array[i, j, k] == el) return true;
+                Console.Write($"{inArray[i, j, k]} ({i}, {j}, {k})\t "); 
+            }
+             WriteLine();
+        }
+       
+    }
+}
+
+bool Unique(int[,,] array, int element) //Метод проверки на уникальность 
+{
+    bool x = false; 
+    for (int length = 0; length < array.GetLength(0); length++) 
+    {
+        for (int height = 0; height < array.GetLength(1); height++)
+        {
+            for (int width = 0; width < array.GetLength(2); width++) 
+            {
+                if (array[length,height,width] == element) 
+                x = true;               
             }
         }
     }
-    return false;
+    return x; 
 }
 
-void PrintArray(int[,,] array)
-{
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            for (int k = 0; k < array.GetLength(2); k++)
-            {
-                Console.Write($"{array[i, j, k]} ({i},{j},{k}) ");
-            }
-            Console.WriteLine();
+WriteLine("Введите размерность трёхмерного массива: ");
+int[,,] firstarray = GetArray(Convert.ToInt32(ReadLine()), Convert.ToInt32(ReadLine()), Convert.ToInt32(ReadLine()));
+WriteLine();
 
-            Console.ReadKey();
-        }
-    }
-}
+WriteLine("Массив построчно, с указанием индекса: ");
+PrintArray(firstarray);
+WriteLine();
