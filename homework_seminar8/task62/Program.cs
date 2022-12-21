@@ -3,31 +3,7 @@
 using static System.Console;
 Clear();
 
-
-int n = 8; // число столбцов / строк 
-int[,] sqareMatrix = new int[n, n];
-
-int temp = -1;
-int i = 0;
-int j = 0;
-
-while (temp <= sqareMatrix.GetLength(0) * sqareMatrix.GetLength(1))
-{
-    sqareMatrix[i, j] = temp;
-    temp++;
-    if (i <= j + 1 && i + j < sqareMatrix.GetLength(1) - 1)
-        j++;
-    else if (i < j && i + j >= sqareMatrix.GetLength(0) - 1)
-        i++;
-    else if (i >= j && i + j > sqareMatrix.GetLength(1) - 1)
-        j--;
-    else
-        i--;
-}
-
-WriteArray(sqareMatrix);
-
-void WriteArray(int[,] array) 
+void PrintArray(int[,] array) //Метод вывода массива
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
@@ -41,3 +17,28 @@ void WriteArray(int[,] array)
         WriteLine();
     }
 }
+
+WriteLine("Введите размерность массива: ");
+int n = Convert.ToInt32(ReadLine());
+WriteLine();
+
+int[,] A = new int[n, n];
+int temp = 1;
+int i = 0;
+int j = 0;
+
+while (temp <= A.GetLength(0) * A.GetLength(1))
+{
+    A[i, j] = temp;
+    temp++;
+    if (i <= j + 1 && i + j < A.GetLength(1) - 1)
+        j++;
+    else if (i < j && i + j >= A.GetLength(0) - 1)
+        i++;
+    else if (i >= j && i + j > A.GetLength(1) - 1)
+        j--;
+    else
+        i--;
+}
+
+PrintArray(A);

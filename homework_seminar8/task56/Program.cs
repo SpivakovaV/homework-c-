@@ -22,7 +22,7 @@ void FillArray(int[,]array) //Метод создания массива
     }
 }
 
-void PrintArray(int[,] array) //Метод вывода массива в консоль
+void PrintArray(int[,] array) //Метод вывода массива
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {

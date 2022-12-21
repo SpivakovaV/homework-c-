@@ -3,7 +3,7 @@
 using static System.Console;
 Clear();
 
-void Print(int[,] a) //Метод выводит заданную матрицу в консоль.
+void Print(int[,] a) //Метод выводит заданную матрицу.
         {
             for (int i = 0; i < a.GetLength(0); i++)
             {
